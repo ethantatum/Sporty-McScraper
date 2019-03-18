@@ -39,19 +39,23 @@ mongoose.connect("mongodb://localhost/sportScraperDB", { useNewUrlParser: true }
 // ROUTING ================================================
 // GET for scraping SBNation
 app.get('/scrape', function(req, res) {
-    axios.get('https://www.sbnation.com/').then(function(response) {
+    axios.get('https://ftw.usatoday.com/').then(function(response) {
         let $ = cheerio.load(response.data);
-        $('h2').each(function(i, element) {
+        $('div.content').each(function(i, element) {
             let result = {};
 
             result.title = $(this)
             .children('a')
-            .text();
+            .attr('title');
             result.summary = $(this)
-            // find on sbnation
+            .children('p')
+            .text();
             result.link = $(this)
             .children('a')
             .attr('href');
+            result.image = $(this)
+            .children('img')
+            .attr('src');
 
             // Create new Article in MongoDB
             db.Article.create(result)
