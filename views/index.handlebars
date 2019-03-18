@@ -1,0 +1,52 @@
+<h1>Sporty McScraper's Latest News and Happenings</h1>
+
+<h2>All content scraped from SBNation.com</h2>
+
+<div class="row mt-5">
+  <div class="col-md-4 to-eat">
+    <h2>Choose a burger to eat!</h2>
+    <ul>
+      {{#each burgers}}
+        {{#unless this.devoured}}
+          <li>
+          {{this.burger_name}}
+
+          <button class="change-eaten" data-id="{{this.id}}" data-eaten="{{this.devoured}}">
+            {{#if this.devoured}}YOU ALREADY ATE ME!{{else}}Eat Me!{{/if}}
+          </button>
+          </li>
+        {{/unless}}
+      {{/each}}
+    </ul>
+  </div>
+
+  <div class="col-md-4 add-burger">
+    <h2>Add a Burger</h2>
+    <form class="create-form">
+
+      <div class="form-group">
+        <label for="ca">Burger Name:</label>
+        <input type="text" id="brgr" name="burger_name">
+      </div>
+
+      <button type="submit">Add Burger</button>
+    </form>
+  </div>
+
+  <div class="col-md-4 eaten">
+    <h2>Burgers that have been eaten</h2>
+    <ul>
+      {{#each burgers}}
+        {{#if devoured}}
+          <li>
+          {{this.burger_name}}
+
+          <button class="change-eaten" data-id="{{this.id}}" data-eaten="{{this.devoured}}">
+            {{#if this.devoured}}YOU ALREADY ATE ME!{{else}}EAT ME!{{/if}}
+          </button>
+          </li>
+        {{/if}}
+      {{/each}}
+    </ul>
+  </div>
+</div>
