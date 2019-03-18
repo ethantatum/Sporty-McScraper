@@ -37,7 +37,7 @@ app.set('view engine', 'handlebars');
 mongoose.connect("mongodb://localhost/sportScraperDB", { useNewUrlParser: true });
 
 // ROUTING ================================================
-// GET for scraping SBNation
+// GET for scraping FTW
 app.get('/scrape', function(req, res) {
     axios.get('https://ftw.usatoday.com/').then(function(response) {
         let $ = cheerio.load(response.data);
@@ -70,7 +70,36 @@ app.get('/scrape', function(req, res) {
     });
 });
 
+// Get all articles from DB
+app.get('/articles', function(req, res) {
+    db.Article.find({})
+    .then(function(dbArticle) {
+        res.render('index', dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
 
+// Get a specific article with its comment
+app.get('/articles/:id', function(req, res) {
+    db.Article.findOne({_id: req.params.id})
+    .populate('comment')
+    .then(function(dbArticle) {
+        res.render('index', dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
+
+// Post for saving/updating comments on articles
+app.post('/articles/:id', function(req, res) {
+    db.Comment.create(req.body)
+    .then(function(dbComment) {
+        return db.Article.findOneAndUpdate({_id: req.params.id}, {comment: dbComment._id}, {new: true});
+    })
+})
 
 
 
