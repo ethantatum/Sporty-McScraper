@@ -1,11 +1,11 @@
-"use strict";
+
 
 // REQUIRES ===============================================
 const express = require("express");
 const exphbs = require("express-handlebars");
 // Morgan gives us some color-coordinated logging tokens
 const logger = require("morgan");
-const mongoose = ("mongoose");
+const mongoose = require("mongoose");
 
 // Scraping tools
 const axios = require("axios");
@@ -45,28 +45,28 @@ app.get('/scrape', function(req, res) {
             let result = {};
 
             result.title = $(this)
-            .find('title')
-            .text();
+            .children('a')
+            .attr('title');
             result.summary = $(this)
-            .find('p')
-            .text();
+            .children('footer')
+            .attr('.time');
             result.link = $(this)
-            .find('.data-track')
+            .children('a')
             .attr('href');
             result.image = $(this)
-            .children('img')
+            .find('img')
             .attr('src');
 
             console.log(result);
 
             // Create new Article in MongoDB
-            // db.Article.create(result)
-            //     .then(function(dbArticle) {
-            //         console.log(dbArticle);
-            //     })
-            //     .catch(function(err) {
-            //         console.log(err);
-            //     });
+            db.Article.create(result)
+                .then(function(dbArticle) {
+                    console.log(dbArticle);
+                })
+                .catch(function(err) {
+                    console.log(err);
+                });
         });
         res.send('Sports scrape complete!');
     });
@@ -76,7 +76,10 @@ app.get('/scrape', function(req, res) {
 app.get('/articles', function(req, res) {
     db.Article.find({})
     .then(function(dbArticle) {
-        res.render('index', dbArticle);
+        let hbsObj = {
+            articles: dbArticle
+        };
+        res.render('index', hbsObj);
     })
     .catch(function(err) {
         res.json(err);

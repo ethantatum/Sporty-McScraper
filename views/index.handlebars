@@ -3,19 +3,17 @@
 <h2>All content scraped from SBNation.com</h2>
 
 <div class="row mt-5">
-  <div class="col-md-4 to-eat">
-    <h2>Choose a burger to eat!</h2>
+  <div class="col-md-8 articles">
+    <h2>Current Stories</h2>
     <ul>
-      {{#each burgers}}
-        {{#unless this.devoured}}
+      {{#each articles}}
           <li>
-          {{this.burger_name}}
-
-          <button class="change-eaten" data-id="{{this.id}}" data-eaten="{{this.devoured}}">
-            {{#if this.devoured}}YOU ALREADY ATE ME!{{else}}Eat Me!{{/if}}
-          </button>
+          {{this.title}}
+          <img class="article-image" src="{{this.image}}">
+          {{this.summary}}
+          <a class="article-link" href="{{this.link}}" target="_blank">{{this.link}}</a>
+          <button class="comment-button" data-id="{{this.id}}">Leave a Comment!</button>
           </li>
-        {{/unless}}
       {{/each}}
     </ul>
   </div>
