@@ -45,26 +45,28 @@ app.get('/scrape', function(req, res) {
             let result = {};
 
             result.title = $(this)
-            .children('a')
-            .attr('title');
+            .find('title')
+            .text();
             result.summary = $(this)
-            .children('p')
+            .find('p')
             .text();
             result.link = $(this)
-            .children('a')
+            .find('.data-track')
             .attr('href');
             result.image = $(this)
             .children('img')
             .attr('src');
 
+            console.log(result);
+
             // Create new Article in MongoDB
-            db.Article.create(result)
-                .then(function(dbArticle) {
-                    console.log(dbArticle);
-                })
-                .catch(function(err) {
-                    console.log(err);
-                });
+            // db.Article.create(result)
+            //     .then(function(dbArticle) {
+            //         console.log(dbArticle);
+            //     })
+            //     .catch(function(err) {
+            //         console.log(err);
+            //     });
         });
         res.send('Sports scrape complete!');
     });
