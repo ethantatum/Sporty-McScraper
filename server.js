@@ -41,7 +41,7 @@ mongoose.connect("mongodb://localhost/sportScraperDB", { useNewUrlParser: true }
 app.get('/scrape', function(req, res) {
     axios.get('https://ftw.usatoday.com/').then(function(response) {
         let $ = cheerio.load(response.data);
-        $('div.content').each(function(i, element) {
+        $('article').each(function(i, element) {
             let result = {};
 
             result.title = $(this)
@@ -97,9 +97,15 @@ app.get('/articles/:id', function(req, res) {
 app.post('/articles/:id', function(req, res) {
     db.Comment.create(req.body)
     .then(function(dbComment) {
-        return db.Article.findOneAndUpdate({_id: req.params.id}, {comment: dbComment._id}, {new: true});
+        return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: {commentArr: dbComment._id}}, {new: true});
     })
-})
+    .then(function(dbArticle) {
+        res.render('index', dbArticle);
+    })
+    .catch(function(err) {
+        res.json(err);
+    });
+});
 
 
 

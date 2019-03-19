@@ -18,11 +18,12 @@ let ArticleSchema = new Schema({
     image: {
         type: String,
         default: 'https://usatftw.files.wordpress.com/2015/11/logo-ftw.png'
-    },
-    comment: {
+    },                      
+    commentArr: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'
-    }
+    }]
+    
 });
 
 let Article = mongoose.model('Article', ArticleSchema);
