@@ -15,9 +15,8 @@ let ArticleSchema = new Schema({
         type: String,
         required: true
     },
-    image: {
-        type: String,
-        default: 'https://usatftw.files.wordpress.com/2015/11/logo-ftw.png'
+    time: {
+        type: Date
     },                      
     commentArr: [{
         type: Schema.Types.ObjectId,

@@ -1,6 +1,7 @@
-<h1>Sporty McScraper's Latest News and Happenings</h1>
+<h1>Sporty McScraper's Latest (Totally True) News and Happenings</h1>
 
-<h2>All content scraped from SBNation.com</h2>
+<h2>All content scraped from The Onion</h2>
+<h3>In case you didn't know, The Onion is a <strong><em>parody</em></strong>site...</h3>
 
 <div class="row mt-5">
   <div class="col-md-8 articles">
@@ -8,17 +9,17 @@
     <ul>
       {{#each articles}}
           <li>
-          {{this.title}}
-          <img class="article-image" src="{{this.image}}">
-          {{this.summary}}
+          {{this.title}}<br>
+          {{this.summary}}<br>
           <a class="article-link" href="{{this.link}}" target="_blank">{{this.link}}</a>
-          <button class="comment-button" data-id="{{this.id}}">Leave a Comment!</button>
+          <button class="comment-button" data-id="{{this.id}}">Leave a Comment!</button><br>
+          {{this.time}}<br>
           </li>
       {{/each}}
     </ul>
   </div>
 
-  <div class="col-md-4 add-burger">
+  {{!-- <div class="col-md-4 add-burger">
     <h2>Add a Burger</h2>
     <form class="create-form">
 
@@ -29,7 +30,7 @@
 
       <button type="submit">Add Burger</button>
     </form>
-  </div>
+  </div> --}}
 
   <div class="col-md-4 eaten">
     <h2>Burgers that have been eaten</h2>

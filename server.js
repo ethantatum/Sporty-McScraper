@@ -39,23 +39,24 @@ mongoose.connect("mongodb://localhost/sportScraperDB", { useNewUrlParser: true }
 // ROUTING ================================================
 // GET for scraping FTW
 app.get('/scrape', function(req, res) {
-    axios.get('https://ftw.usatoday.com/').then(function(response) {
+    axios.get('https://www.theonion.com/c/sports-news-in-brief').then(function(response) {
         let $ = cheerio.load(response.data);
         $('article').each(function(i, element) {
             let result = {};
 
             result.title = $(this)
-            .children('a')
-            .attr('title');
+            .find('h1.headline.entry-title')
+            .text();
             result.summary = $(this)
-            .children('footer')
-            .attr('.time');
+            .find('.excerpt p')
+            .text();
             result.link = $(this)
-            .children('a')
+            .find('a.js_link')
             .attr('href');
-            result.image = $(this)
-            .find('img')
-            .attr('src');
+            result.time = $(this)
+            .find('time')
+            .attr('datetime');
+            
 
             console.log(result);
 
