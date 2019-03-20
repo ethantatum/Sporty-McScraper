@@ -1,39 +1,27 @@
 <h1>Sporty McScraper's Latest (Totally True) News and Happenings</h1>
 
 <h2>All content scraped from The Onion</h2>
-<h3>In case you didn't know, The Onion is a <strong><em>parody</em></strong>site...</h3>
+<h3>In case you didn't know, The Onion is a <strong><em>parody</em></strong> site...</h3>
 
 <div class="row mt-5">
   <div class="col-md-8 articles">
     <h2>Current Stories</h2>
     <ul>
       {{#each articles}}
-          <li>
-          {{this.title}}<br>
-          {{this.summary}}<br>
-          <a class="article-link" href="{{this.link}}" target="_blank">{{this.link}}</a>
-          <button class="comment-button" data-id="{{this.id}}">Leave a Comment!</button><br>
-          {{this.time}}<br>
+          <li class="mb-4">
+            {{this.time}}<br>
+            <h5>{{this.title}}</h5>
+            <h6>{{this.summary}}</h6>
+            <a class="article-link" href="{{this.link}}" target="_blank">{{this.link}}</a><br>
+            <button class="comment-button" data-id="{{this.id}}">Leave a Comment!</button><br>
           </li>
       {{/each}}
     </ul>
   </div>
 
-  {{!-- <div class="col-md-4 add-burger">
-    <h2>Add a Burger</h2>
-    <form class="create-form">
 
-      <div class="form-group">
-        <label for="ca">Burger Name:</label>
-        <input type="text" id="brgr" name="burger_name">
-      </div>
-
-      <button type="submit">Add Burger</button>
-    </form>
-  </div> --}}
-
-  <div class="col-md-4 eaten">
-    <h2>Burgers that have been eaten</h2>
+  <div class="col-md-4 comments">
+    <h2>Comments</h2>
     <ul>
       {{#each burgers}}
         {{#if devoured}}
