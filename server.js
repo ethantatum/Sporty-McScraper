@@ -37,7 +37,7 @@ app.set('view engine', 'handlebars');
 mongoose.connect("mongodb://localhost/sportScraperDB", { useNewUrlParser: true });
 
 // ROUTING ================================================
-// GET for scraping FTW
+// GET for scraping
 app.get('/scrape', function(req, res) {
     axios.get('https://www.theonion.com/c/sports-news-in-brief').then(function(response) {
         let $ = cheerio.load(response.data);
@@ -57,9 +57,6 @@ app.get('/scrape', function(req, res) {
             .find('time')
             .attr('datetime');
             
-
-            console.log(result);
-
             // Create new Article in MongoDB
             db.Article.create(result)
                 .then(function(dbArticle) {
@@ -77,10 +74,7 @@ app.get('/scrape', function(req, res) {
 app.get('/articles', function(req, res) {
     db.Article.find({})
     .then(function(dbArticle) {
-        let hbsObj = {
-            articles: dbArticle
-        };
-        res.render('index', hbsObj);
+        res.json(dbArticle);
     })
     .catch(function(err) {
         res.json(err);
@@ -92,7 +86,7 @@ app.get('/articles/:id', function(req, res) {
     db.Article.findOne({_id: req.params.id})
     .populate('comment')
     .then(function(dbArticle) {
-        res.render('index', dbArticle);
+        res.json(dbArticle);
     })
     .catch(function(err) {
         res.json(err);
@@ -106,6 +100,7 @@ app.post('/articles/:id', function(req, res) {
         return db.Article.findOneAndUpdate({_id: req.params.id}, {$push: {commentArr: dbComment._id}}, {new: true});
     })
     .then(function(dbArticle) {
+        
         res.render('index', dbArticle);
     })
     .catch(function(err) {

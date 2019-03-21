@@ -23,14 +23,13 @@
   <div class="col-md-4 comments">
     <h2>Comments</h2>
     <ul>
-      {{#each burgers}}
-        {{#if devoured}}
+      {{#each articles}}
+        {{#if body}}
           <li>
-          {{this.burger_name}}
-
-          <button class="change-eaten" data-id="{{this.id}}" data-eaten="{{this.devoured}}">
-            {{#if this.devoured}}YOU ALREADY ATE ME!{{else}}EAT ME!{{/if}}
-          </button>
+          <h2>{{this.commentTitle}}</h2>
+          <input id='titleinput' name='title' >
+          <textarea id='bodyinput' name='body'></textarea>
+          <button data-id={{this._id}} id='savecomment'>Save Comment</button>
           </li>
         {{/if}}
       {{/each}}
