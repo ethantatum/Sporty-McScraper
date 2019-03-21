@@ -30,8 +30,8 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Use Handlebars engine
-app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
-app.set('view engine', 'handlebars');
+//app.engine('handlebars', exphbs({ defaultLayout: 'main' }));
+//app.set('view engine', 'handlebars');
 
 // Connect to MongoDB
 mongoose.connect("mongodb://localhost/sportScraperDB", { useNewUrlParser: true });
@@ -60,7 +60,6 @@ app.get('/scrape', function(req, res) {
             // Create new Article in MongoDB
             db.Article.create(result)
                 .then(function(dbArticle) {
-                    console.log(dbArticle);
                 })
                 .catch(function(err) {
                     console.log(err);
@@ -74,10 +73,7 @@ app.get('/scrape', function(req, res) {
 app.get('/articles', function(req, res) {
     db.Article.find({})
     .then(function(dbArticle) {
-        let hbsObj = {
-            articles: dbArticle
-        }
-        res.render('index', hbsObj);
+        res.json(dbArticle);
     })
     .catch(function(err) {
         res.json(err);
@@ -104,7 +100,7 @@ app.post('/articles/:id', function(req, res) {
     })
     .then(function(dbArticle) {
         
-        res.render('index', dbArticle);
+        res.json(dbArticle);
     })
     .catch(function(err) {
         res.json(err);

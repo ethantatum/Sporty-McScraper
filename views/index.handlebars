@@ -21,17 +21,8 @@
 
 
   <div class="col-md-4 comments">
-    <h2>Comments</h2>
-    <ul>
-      {{#each articles}}
-        {{#if Comment}}
-          <li>
-          <input id='titleinput' name='title' {{this.commentTitle}}>
-          <textarea id='bodyinput' name='body'>{{this.commentBody}}</textarea>
-          <button data-id={{this._id}} id='savecomment'>Save Comment</button>
-          </li>
-        {{/if}}
-      {{/each}}
-    </ul>
+    <div id="comments">
+
+    </div>
   </div>
 </div>
