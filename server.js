@@ -83,7 +83,7 @@ app.get('/articles', function(req, res) {
 // Get a specific article with its comment
 app.get('/articles/:id', function(req, res) {
     db.Article.findOne({_id: req.params.id})
-    .populate('comment')
+    .populate('commentArr')
     .then(function(dbArticle) {
         res.json(dbArticle);
     })

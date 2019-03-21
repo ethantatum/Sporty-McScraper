@@ -25,16 +25,18 @@ $(document).on('click', '.comment-button', function() {
     })
         // Add comment information to page
         .then(function(data) {
-            console.log(data);
-            $('#comments').append(`<div class='comment-container'>
-            <h2 class='comment-title'>${data.title}</h2><br>
-            <input id='titleinput' name='title'><br>
-            <textarea id='bodyinput' name='body'></textarea><br>
-            <button data-id='${data._id}' id='savenote'>Save Comment</button></div>`);
+            console.log(data.commentArr);
+            for (let j = 0; j < data.commentArr.length; j++) {
+                $('#comments').append(`<div class='comment-container'>
+                <h2 class='comment-title'>${data.title}</h2><br>
+                <input id='titleinput' name='title'><br>
+                <textarea id='bodyinput' name='body'></textarea><br>
+                <button data-id='${data._id}' id='savenote'>Save Comment</button></div>`);
 
-            if (data.comment) {
-                $('#titleinput').val(data.comment.commentTitle);
-                $('#bodyinput').val(data.comment.commentBody);
+                if (data.commentArr) {
+                    $('#titleinput').val(data.commentArr[j].commentTitle);
+                    $('#bodyinput').val(data.commentArr[j].commentBody);
+                }
             }
         });
 });
