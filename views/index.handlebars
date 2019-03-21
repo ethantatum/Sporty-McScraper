@@ -24,11 +24,10 @@
     <h2>Comments</h2>
     <ul>
       {{#each articles}}
-        {{#if body}}
+        {{#if Comment}}
           <li>
-          <h2>{{this.commentTitle}}</h2>
-          <input id='titleinput' name='title' >
-          <textarea id='bodyinput' name='body'></textarea>
+          <input id='titleinput' name='title' {{this.commentTitle}}>
+          <textarea id='bodyinput' name='body'>{{this.commentBody}}</textarea>
           <button data-id={{this._id}} id='savecomment'>Save Comment</button>
           </li>
         {{/if}}
