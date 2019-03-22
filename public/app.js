@@ -2,14 +2,16 @@
 $.get('/articles', function(data) {
     for (let i = 0;  i < data.length; i++) {
         // Display articles to page
-        $('#articles').append(`<div data-id='${data[i]._id}'>
-        <p class='article-time'>${data[i].time}</p><br>
+        let time = moment(data[i].time).startOf('day').fromNow();
+        $('#articles').append(`<div class='border border-dark rounded-right pl-2 py-3 mb-1' data-id='${data[i]._id}'>
+        <p class='article-time'>${time}</p>
         <h5 class='article-title'>${data[i].title}</h5><br>
-        <h6 class='article-summary'>${data[i].summary}</h6><br>
+        <h6 class='article-summary'>${data[i].summary}</h6>
         <a href='${data[i].link}' target='_blank'>${data[i].link}</a><br>
-        <button class='comment-button' id='leave-comment' data-id='${data[i]._id}'>Leave a Comment!</button></div><br>`);
+        <button class='comment-button mr-2 my-2 float-right' id='leave-comment' data-id='${data[i]._id}'>Leave a Comment!</button>
+        <div id='${data[i]._id}'</div></div><br>`);
         if(data[i].commentArr.length > 0) {
-            $('#articles').append(`<button class='comment-button' id='view-comments' data-id='${data[i]._id}'>View Comments!</button>`)    
+            $(`#${data[i]._id}`).append(`<button class='comment-button mr-2 my-2 float-right' id='view-comments' data-id='${data[i]._id}'>View Comments!</button>`)    
         }
     }
 });
@@ -31,9 +33,9 @@ $(document).on('click', '#view-comments', function() {
             console.log(data.commentArr);
                 $('#comments').append(`<h2>Current Comments</h2>`);
                 for (let j = 0; j < data.commentArr.length; j++) {
-                    $('#comments').append(`<div class='comment-container'>            
-                    <h5 id='comment-title'>${data.commentArr[j].commentTitle}</h5><br>
-                    <p id='comment-body'>${data.commentArr[j].commentBody}</p></div><br>`);
+                    $('#comments').append(`<div class='comment-container border border-dark rounded-left pl-2 py-2 mb-1'>            
+                    <h4 id='comment-title'>${data.commentArr[j].commentTitle}</h4>
+                    <p id='comment-body'>${data.commentArr[j].commentBody}</p></div>`);
                     }
             
                     

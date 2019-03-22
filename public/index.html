@@ -3,31 +3,35 @@
 <head>
 	<meta charset="UTF-8">
     <title>Sporty McScraper</title>
-    <link href="https://fonts.googleapis.com/css?family=Abril+Fatface|Limelight" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Arvo:400,400i|Fredericka+the+Great|Special+Elite" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" 
             integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" 
             crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="./css/style.css" type="text/css" /> -->
+    <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="shortcut icon" href="favicon.ico"/>
 </head>
-<body id="background-image">
-    <h1>Sporty McScraper's Latest (Totally True) News and Happenings</h1>
+<body id="background">
+    <div class="container border border-dark rounded-bottom text-center">
+        <h1>Sporty McScraper's Latest (Totally True) News and Happenings</h1>
 
-    <h2>All content scraped from The Onion</h2>
-    <h3>In case you didn't know, The Onion is a <strong><em>parody</em></strong> site...</h3>
+        <h2>All content scraped from The Onion</h2>
+        <h3>(In case you weren't aware, The Onion is a parody site...)</h3>
+    </div>  
 
     <div class="row mt-5">
-        <div class="col-md-8 articles">
+        <div class="col-md-8 ml-2 articles">
             <h2>Current Stories</h2>
+            <button class="float-right" id="scrape">Get New Stories!</button>
             <div id="articles"></div>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-3">
             <div id=comments></div>
         </div>
     </div>
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/momentjs/2.12.0/moment.min.js"></script>
     <script src="app.js"></script>
 </body>
 </html>
