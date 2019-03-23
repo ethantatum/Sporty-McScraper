@@ -10,21 +10,21 @@
     <link rel="stylesheet" href="style.css" type="text/css" />
     <link rel="shortcut icon" href="favicon.ico"/>
 </head>
-<body id="background">
-    <div class="container border border-dark rounded-bottom text-center">
-        <h1>Sporty McScraper's Latest (Totally True) News and Happenings</h1>
+<body class="background">
+    <div class="container-fluid border border-dark rounded-bottom text-center">
+        <h1 class="py-2">Sporty McScraper's Latest (Totally True) News and Happenings</h1>
 
         <h2>All content scraped from The Onion</h2>
         <h3>(In case you weren't aware, The Onion is a parody site...)</h3>
     </div>  
-
-    <div class="row mt-5">
+    <!-- <button class="ml-2 mt-3 rounded" id="scrape">Get New Stories!</button> -->
+    
+    <div class="row mt-3">
         <div class="col-md-8 ml-2 articles">
-            <h2>Current Stories</h2>
-            <button class="float-right" id="scrape">Get New Stories!</button>
+            <h2 class="text-white">Current Stories</h2>
             <div id="articles"></div>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-3 comments">
             <div id=comments></div>
         </div>
     </div>

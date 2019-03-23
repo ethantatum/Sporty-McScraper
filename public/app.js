@@ -3,15 +3,15 @@ $.get('/articles', function(data) {
     for (let i = 0;  i < data.length; i++) {
         // Display articles to page
         let time = moment(data[i].time).startOf('day').fromNow();
-        $('#articles').append(`<div class='border border-dark rounded-right pl-2 py-3 mb-1' data-id='${data[i]._id}'>
+        $('#articles').append(`<div class='content-box border border-dark rounded-right pl-2 py-3 mb-1' data-id='${data[i]._id}'>
         <p class='article-time'>${time}</p>
-        <h5 class='article-title'>${data[i].title}</h5><br>
-        <h6 class='article-summary'>${data[i].summary}</h6>
+        <h4 class='article-title font-weight-bold'>${data[i].title}</h4><br>
+        <h5 class='article-summary'>${data[i].summary}</h5>
         <a href='${data[i].link}' target='_blank'>${data[i].link}</a><br>
-        <button class='comment-button mr-2 my-2 float-right' id='leave-comment' data-id='${data[i]._id}'>Leave a Comment!</button>
+        <button class='comment-button mr-2 my-2 float-right rounded' id='leave-comment' data-id='${data[i]._id}'>Leave a Comment!</button>
         <div id='${data[i]._id}'</div></div><br>`);
         if(data[i].commentArr.length > 0) {
-            $(`#${data[i]._id}`).append(`<button class='comment-button mr-2 my-2 float-right' id='view-comments' data-id='${data[i]._id}'>View Comments!</button>`)    
+            $(`#${data[i]._id}`).append(`<button class='comment-button mr-2 my-2 float-right rounded' id='view-comments' data-id='${data[i]._id}'>View Comments!</button>`)    
         }
     }
 });
@@ -31,10 +31,10 @@ $(document).on('click', '#view-comments', function() {
         // Add comment information to page
         .then(function(data) {
             console.log(data.commentArr);
-                $('#comments').append(`<h2>Current Comments</h2>`);
+                $('#comments').append(`<h2 class='text-white'>Current Comments</h2>`);
                 for (let j = 0; j < data.commentArr.length; j++) {
-                    $('#comments').append(`<div class='comment-container border border-dark rounded-left pl-2 py-2 mb-1'>            
-                    <h4 id='comment-title'>${data.commentArr[j].commentTitle}</h4>
+                    $('#comments').append(`<div class='content-box comment-container border border-dark rounded-left pl-2 pt-2 mb-1'>            
+                    <h4 class='font-weight-bold' id='comment-title'>${data.commentArr[j].commentTitle}</h4>
                     <p id='comment-body'>${data.commentArr[j].commentBody}</p></div>`);
                     }
             
@@ -49,10 +49,11 @@ $(document).on('click', '#leave-comment', function() {
     //Save ID
     let thisID = $(this).attr('data-id');
     // Add comment insert box to page
-    $('#comments').append(`<div class='insert-container'>
+    $('#comments').append(`<h2 class='text-white'>Leave a Comment</h2>`);
+    $('#comments').append(`<div class='insert-container content-box border border-dark rounded-left pl-2 py-2'>
         <input id='titleinput' name='title' placeholder='Insert Comment Title'><br>
         <textarea id='bodyinput' name='body' placeholder='Insert Comment Here'></textarea><br>
-        <button data-id='${thisID}' id='save-comment'>Save Comment</button></div>`);        
+        <button class='rounded' data-id='${thisID}' id='save-comment'>Save Comment</button></div>`);        
 });
 
 // When user clicks save comment button

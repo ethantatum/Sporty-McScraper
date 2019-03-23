@@ -1,15 +1,35 @@
 * {
     font-family: 'Special Elite', cursive;
+    font-weight: bold;
+}
+
+.background {
+    background-color: #454545
+}
+
+#scrape {
+    font-family: 'Special Elite', cursive;
+    font-weight: bold;
+}
+.container-fluid, .content-box {
+    background-image: url('newspaper.jpg');
+    opacity: 0.95;
+
 }
 
 h1, h2, h3 {
     font-family: 'Fredericka the Great', cursive;
+    font-weight: bold;
 }
 
 #articles {
     display: inline-block;
     overflow: auto;
     height: 700px;
+}
+
+input, textarea {
+    width: 95%;
 }
 
 /* width */
