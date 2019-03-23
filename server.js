@@ -34,7 +34,10 @@ app.use(express.static("public"));
 //app.set('view engine', 'handlebars');
 
 // Connect to MongoDB
-mongoose.connect("mongodb://localhost/sportScraperDB", { useNewUrlParser: true });
+// If deployed, use the deployed database. Otherwise use the local sportScraperDB database
+let MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/sportScraperDB";
+
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true });
 
 // ROUTING ================================================
 // GET for scraping
